@@ -1,6 +1,12 @@
 # Code_GDAL
 
-Import data from Google Drive
+## CLI
+
+```shell
+gdalinfo --version
+```
+
+## Import data from Google Drive
 
 ```python
 # Authentication
