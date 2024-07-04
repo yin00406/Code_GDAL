@@ -41,3 +41,22 @@ except subprocess.CalledProcessError as e:
 subprocess.run(["gdaltindex", PATH_GENERATED_SHAPE, PATH_REF_TIFF], capture_output=True, text=True, check=True, shell=True)
 ```
 
+## Common GDAL command
+
+```python
+# merge images
+gdal_merge.py -o {OUTPUT_PATH_MERGED_TIFF} -co {COMPRESSION_TYPE} {INPUT_PATH_FILES}
+
+# from raster to boundary shapefile
+gdaltindex {OUTPUT_PATH_SHAPEFILE} {INPUT_PATH_TIFF}
+
+# resampling
+gdalwarp -crop_to_cutline -cutline {PATH_BOUNDARY} -ts {NUM_WIDTH} {NUM_HEIGHT} {INPUT_PATH_TIFF} {OUTPUT_PATH_RESAMPLED_TIFF}
+
+# vector data rasterization
+gdal_rastersize -ts {NUM_WIDTH} {NUM_HEIGHT} -a {RASTER_VALUE_ATTRIBUTE_NAME} -of GTiff -ot {DATA_TYPE} -co {COMPRESSION_TYPE} {INPUT_PATH_SHAPEFILES} {OUTPUT_PATH_RASTER}
+
+# clip imagery with boundary shapefile
+gdalwarp -overwrite -dstnodata {UNKNOW_CLASS} -crop_to_cutline -cutline {SHAPE_PATH} {MERGED_PATH} {CLIPPED_PATH}
+```
+
