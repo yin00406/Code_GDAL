@@ -46,6 +46,13 @@ subprocess.run(["gdaltindex", PATH_GENERATED_SHAPE, PATH_REF_TIFF], capture_outp
 ```python
 # merge images
 gdal_merge.py -o {OUTPUT_PATH_MERGED_TIFF} -co {COMPRESSION_TYPE} {INPUT_PATH_FILES}
+'''
+command = [
+    "gdal_merge.py",
+    '-o', mosaic_path,
+    '-co', 'COMPRESS=LZW',
+    ]+config.TILES_TRAIN_BEN
+'''
 
 # from raster to boundary shapefile
 gdaltindex {OUTPUT_PATH_SHAPEFILE} {INPUT_PATH_TIFF}
